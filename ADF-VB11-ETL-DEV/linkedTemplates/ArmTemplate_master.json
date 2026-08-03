@@ -1,0 +1,70 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-VB11-ETL-DEV"
+		},
+		"LS_SNowflake_Parquet_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SNowflake_Parquet'"
+		},
+		"LS_Snowflake_Sink_Parquet_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_Snowflake_Sink_Parquet'"
+		},
+		"DS_Snowflake_sink_parquet_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'DS_Snowflake_sink_parquet'"
+		},
+		"LS_SNowflake_Parquet_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "DBAZURESNOW"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ADF-VB11-ETL-DEV_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_SNowflake_Parquet_password": {
+						"value": "[parameters('LS_SNowflake_Parquet_password')]"
+					},
+					"LS_Snowflake_Sink_Parquet_connectionString": {
+						"value": "[parameters('LS_Snowflake_Sink_Parquet_connectionString')]"
+					},
+					"DS_Snowflake_sink_parquet_sasUri": {
+						"value": "[parameters('DS_Snowflake_sink_parquet_sasUri')]"
+					},
+					"LS_SNowflake_Parquet_properties_typeProperties_database": {
+						"value": "[parameters('LS_SNowflake_Parquet_properties_typeProperties_database')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

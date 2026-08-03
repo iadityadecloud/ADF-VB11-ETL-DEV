@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-VB11-ETL-DEV"
+		},
+		"LS_SNowflake_Parquet_password": {
+			"value": ""
+		},
+		"LS_Snowflake_Sink_Parquet_connectionString": {
+			"value": ""
+		},
+		"DS_Snowflake_sink_parquet_sasUri": {
+			"value": ""
+		},
+		"LS_SNowflake_Parquet_properties_typeProperties_database": {
+			"value": "DBAZURESNOW"
+		}
+	}
+}
